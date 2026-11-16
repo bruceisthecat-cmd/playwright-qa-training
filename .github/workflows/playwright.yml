@@ -29,10 +29,8 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium firefox
 
-      - name: Run Playwright login tests
-        run: npx playwright test tests/login.spec.ts --project=chromium
-
-      - name: Upload test reports
+      - name: Run Playwright functional regression tests
+        run: npx playwright test tests/login.spec.ts tests/network.spec.ts tests/media.spec.ts tests/multitab.spec.ts --project=chromium
         if: always()
         uses: actions/upload-artifact@v4
         with:
