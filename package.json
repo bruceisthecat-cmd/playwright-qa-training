@@ -1,0 +1,19 @@
+{
+  "name": "telemetry-qa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "mock": "node mock-app/server.js",
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:network": "playwright test --grep @network",
+    "test:media": "playwright test --grep @media",
+    "test:visual:update": "playwright test --grep @visual --update-snapshots",
+    "report": "playwright show-report reports/html"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}
