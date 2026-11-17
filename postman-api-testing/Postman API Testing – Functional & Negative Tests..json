@@ -1,0 +1,123 @@
+          "path": [
+            "get"
+          ],
+          "query": [
+            {
+              "key": "accountId",
+              "value": "12345"
+            },
+            {
+              "key": "status",
+              "value": "active"
+            }
+          ],
+          "protocol": "https"
+        },
+        "description": "Checks the GET echo response for HTTP 200 and verifies the accountId and status query parameters."
+      },
+      "response": []
+    },
+    {
+      "name": "POST - Payment Payload (Positive Test)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\nconst data = pm.response.json().json;\n\npm.test(\"Account ID matches\", function () {\n    pm.expect(data.accountId).to.eql(\"12345\");\n});\n\npm.test(\"Transaction type is payment\", function () {\n    pm.expect(data.transactionType).to.eql(\"payment\");\n});\n\npm.test(\"Payment amount must be positive\", function () {\n    pm.expect(data.amount).to.be.above(0);\n});\n\npm.test(\"Payment status is pending\", function () {\n    pm.expect(data.status).to.eql(\"pending\");\n});\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "\n{\n  \"accountId\": \"12345\",\n  \"transactionType\": \"payment\",\n  \"amount\": 250.00,\n  \"status\": \"pending\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://postman-echo.com/post",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "post"
+          ],
+          "protocol": "https"
+        },
+        "description": "Sends a sample payment JSON payload to Postman Echo and checks HTTP 200, echoed fields, and a positive payment amount."
+      },
+      "response": []
+    },
+    {
+      "name": "GET - 404 Not Found (Expected Response)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test(\"HTTP status is 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});\r\n\r\npm.test(\"Response body reports 404\", function () {\r\n    const data = pm.response.json();\r\n    pm.expect(data.status).to.eql(404);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://postman-echo.com/status/404",
+          "protocol": "https",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "status",
+            "404"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET - 400 Bad Request (Expected Response)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\npm.test(\"HTTP status is 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});\r\n\r\npm.test(\"Response body reports 400\", function () {\r\n    const data = pm.response.json();\r\n    pm.expect(data.status).to.eql(400);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://postman-echo.com/status/400",
+          "protocol": "https",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "status",
+            "400"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
