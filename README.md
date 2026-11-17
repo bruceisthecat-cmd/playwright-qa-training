@@ -112,3 +112,17 @@ Reports are generated in `reports/html` and `reports/results.json`.
 This project strengthened my practical understanding of automated test execution, reusable test architecture, CI pipelines, and troubleshooting.
 
 More importantly, it reinforced the importance of applying QA judgment to automation: a passing test is only meaningful when it validates the correct requirements and expected behavior.
+
+## Additional QA Training: Postman API Testing
+
+I also completed a hands-on API testing project using Postman, building on my enterprise QA/UAT background.
+
+The project includes:
+- 4 REST API requests covering GET, POST, and expected HTTP error responses
+- 12 JavaScript assertions validating status codes, JSON responses, and transaction data
+- Positive and negative testing, including an intentionally failed payment-amount assertion
+- 12/12 assertions passing in the Postman Collection Runner
+
+**[View Postman API Testing Project](postman-api-testing/README.md)**
+
+This is an independent technical training exercise using the Postman Echo API.
